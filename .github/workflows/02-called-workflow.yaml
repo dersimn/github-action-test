@@ -1,3 +1,5 @@
+name: 02 Called Workflow
+
 on:
   workflow_dispatch:
   workflow_call:
