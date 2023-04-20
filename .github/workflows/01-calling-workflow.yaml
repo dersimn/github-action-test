@@ -1,0 +1,10 @@
+name: 01 Calling Workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  call-workflow-passing-data:
+    uses: dersimn/github-action-test/.github/workflows/02-called-workflow.yaml@main
