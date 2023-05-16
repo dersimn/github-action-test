@@ -7,4 +7,12 @@ on:
 
 jobs:
   call-workflow-passing-data:
-    uses: dersimn/github-action-test/.github/workflows/02-called-workflow.yaml@main
+    runs-on: ubuntu-latest
+    steps:
+      - name: step1
+        run: |
+          sleep 10
+          echo Done!
+      - name: step two
+        if: 42 == 42
+        uses: dersimn/github-action-test/.github/workflows/02-called-workflow.yaml@main
