@@ -47,4 +47,5 @@ jobs:
           fi
   
   call-workflow-passing-data:
+    needs: check-needs-no-update
     uses: ./.github/workflows/02-called-workflow.yaml
