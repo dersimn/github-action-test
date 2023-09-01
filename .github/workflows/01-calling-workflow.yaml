@@ -7,4 +7,4 @@ on:
 
 jobs:
   call-workflow-passing-data:
-    uses: dersimn/github-action-test/.github/workflows/02-called-workflow.yaml@main
+    uses: ./.github/workflows/02-called-workflow.yaml@main
