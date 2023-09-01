@@ -20,6 +20,14 @@ jobs:
         run: |
           echo "Needs updating: ${{ steps.check.outputs.needs-updating }}"
 
+      - name: Check result
+        run: |
+          echo "Needs updating: ${{ steps.check.outputs.needs-updating }}"
+          if [[ "${{ steps.check.outputs.needs-updating }}" == "false" ]]; then
+            echo "Strings are equal."
+            exit 1
+          fi
+
   check-needs-no-update:
     runs-on: ubuntu-latest
     steps:
