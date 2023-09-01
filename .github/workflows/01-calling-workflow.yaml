@@ -17,6 +17,7 @@ jobs:
           image: dersimn/netutils:ubuntu
 
       - name: Check result
-        run: echo "Needs updating: ${{ steps.check.outputs.needs-updating }}"
+        run: |
+          echo "Needs updating: ${{ steps.check.outputs.needs-updating }}"
   call-workflow-passing-data:
     uses: ./.github/workflows/02-called-workflow.yaml
