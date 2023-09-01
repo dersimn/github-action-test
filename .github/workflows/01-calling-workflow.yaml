@@ -19,5 +19,20 @@ jobs:
       - name: Check result
         run: |
           echo "Needs updating: ${{ steps.check.outputs.needs-updating }}"
+
+  check-needs-no-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if update available
+        id: check
+        uses: lucacome/docker-image-update-checker@v1
+        with:
+          base-image: library/ubuntu:latest
+          image: library/ubuntu:latest
+
+      - name: Check result
+        run: |
+          echo "Needs updating: ${{ steps.check.outputs.needs-updating }}"
+  
   call-workflow-passing-data:
     uses: ./.github/workflows/02-called-workflow.yaml
