@@ -33,6 +33,10 @@ jobs:
       - name: Check result
         run: |
           echo "Needs updating: ${{ steps.check.outputs.needs-updating }}"
+          if [[ "${{ steps.check.outputs.needs-updating }}" == "false" ]]; then
+            echo "Strings are equal."
+            exit 1
+          fi
   
   call-workflow-passing-data:
     uses: ./.github/workflows/02-called-workflow.yaml
