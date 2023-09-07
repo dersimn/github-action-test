@@ -12,11 +12,15 @@ jobs:
       - name: Output current branch name & date
         # To use latest action, specify "release-master" instead of "v0.0.2"
         uses: satackey/action-js-inline@v0.0.2
+        env:
+          MYTOKEN: ${{ github.token }}
         id: getdata
         with:
           # Edit the following line to install packages required to run your script.
           required-packages: semver
           script: |
+            console.log(process.env);
+            
             const semver = require('semver')
             const github = require('@actions/github');
             const core = require('@actions/core');
