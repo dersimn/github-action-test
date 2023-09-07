@@ -18,6 +18,7 @@ jobs:
         with:
           # Edit the following line to install packages required to run your script.
           required-packages: semver
+          github-token: ${{ github.token }}
           script: |
             console.log(process.env);
             
