@@ -28,4 +28,11 @@ jobs:
   call-workflow-passing-data:
     needs: check-needs-update
     if: ${{ needs.check-needs-update.outputs.needs-updating == 'true' }}
-    uses: ./.github/workflows/02-called-workflow.yaml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Invoke workflow without inputs
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: 02-called-workflow.yaml
+          ref: main
+          inputs: '{"greeting": "Foo"}'
