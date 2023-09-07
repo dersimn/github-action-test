@@ -34,6 +34,12 @@ jobs:
             console.log(tags);
             const releases = tags.filter(t => !semver.prerelease(t));
             console.log(releases);
+
+            const highest1 = semver.maxSatisfying(releases, '1.x');
+            console.log(highest1);
+            const highest2 = semver.maxSatisfying(releases, '2.x');
+            console.log(highest2);
+            
             const clean = releases.map(r => semver.clean(r));
             console.log(clean);
 
