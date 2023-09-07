@@ -18,4 +18,17 @@ jobs:
           required-packages: semver
           script: |
             const semver = require('semver')
+
+            const token = core.getInput('github-token', {required: true})
+            console.log(token);
+            const octokit = github.getOctokit(token)
+
+            const response = await octokit.rest.repos.listTags({
+              owner: 'dersimn',
+              repo: 'github-action-test'
+            });
+            
+            const tags = response.data.map(t => t.name);
+            console.log(tags);
+            
             console.log(semver.inc('1.2.3', 'prerelease', 'beta', '1'))
