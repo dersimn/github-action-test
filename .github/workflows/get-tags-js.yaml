@@ -13,7 +13,7 @@ jobs:
         id: set-result
         with:
           script: |
-            const tags = await octokit.rest.repos.listTags({
+            const tags = await github.rest.repos.listTags({
               owner: 'dersimn',
               repo: 'github-action-test'
             });
