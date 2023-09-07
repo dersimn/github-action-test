@@ -1,0 +1,22 @@
+name: Get Tags
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  check-needs-update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        id: set-result
+        with:
+          script: |
+            const tags = await octokit.rest.repos.listTags({
+              'dersimn',
+              'github-action-test',
+            });
+            return tags;
+      - name: Get result
+        run: echo "${{steps.set-result.outputs.result}}"
