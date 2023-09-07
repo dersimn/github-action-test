@@ -28,8 +28,8 @@ jobs:
             const octokit = github.getOctokit(process.env.GITHUB_TOKEN)
 
             const response = await octokit.rest.repos.listTags({
-              owner: 'dersimn',
-              repo: 'github-action-test'
+              owner: github.context.repo.owner,
+              repo: github.context.repo.repo
             });
             
             const tags = response.data.map(t => t.name);
