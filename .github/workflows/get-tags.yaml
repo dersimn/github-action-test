@@ -12,7 +12,7 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: get_latest_release
         with:
-          route: GET /repos/{owner}/{repo}/git/matching-refs/tags
+          route: GET /repos/${{ github.repository }}/git/matching-refs/tags
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: "echo latest release: '${{ steps.get_latest_release.outputs.data }}'"
