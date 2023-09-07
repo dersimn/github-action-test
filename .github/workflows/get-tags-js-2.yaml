@@ -32,5 +32,5 @@ jobs:
             
             const tags = response.data.map(t => t.name);
             console.log(tags);
-            
-            console.log(semver.inc('1.2.3', 'prerelease', 'beta', '1'))
+            const releases = tags.filter(t => !semver.prerelease(t));
+            console.log(releases);
