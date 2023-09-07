@@ -6,8 +6,10 @@ on:
     branches: [ "main" ]
 
 jobs:
-  check-needs-update:
+  tags:
     runs-on: ubuntu-latest
+    outputs:
+      releases: ${{steps.getdata.outputs.releases}}
     steps:
       - name: Output current branch name & date
         # To use latest action, specify "release-master" instead of "v0.0.2"
@@ -43,7 +45,17 @@ jobs:
             const clean = releases.map(r => semver.clean(r));
             console.log(clean);
 
-            core.setOutput('tags', JSON.stringify(clean))
+            core.setOutput('releases', JSON.stringify(releases))
             
       - name: Get result
-        run: echo '${{steps.getdata.outputs.tags}}'
+        run: echo '${{steps.getdata.outputs.releases}}'
+
+  read:
+    needs: [ tags ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        myrelease: ${{fromJSON(needs.tags.outputs.releases)}}
+    steps:
+      - run: |
+          echo "${{ matrix.myrelease }}"
