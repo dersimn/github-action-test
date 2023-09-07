@@ -1,0 +1,21 @@
+name: Get Tags JS 2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  check-needs-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output current branch name & date
+        # To use latest action, specify "release-master" instead of "v0.0.2"
+        uses: satackey/action-js-inline@v0.0.2
+        id: getdata
+        with:
+          # Edit the following line to install packages required to run your script.
+          required-packages: semver
+          script: |
+            const semver = require('semver')
+            console.log(semver.inc('1.2.3', 'prerelease', 'beta', '1'))
