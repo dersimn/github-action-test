@@ -16,4 +16,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: "echo latest release: '${{ steps.get_latest_release.outputs.data }}'"
-      - run: "echo extracted: '${{ steps.get_latest_release.outputs.data.*.ref }}'"
+      - run: "echo extracted: '${{ fromJSON(steps.get_latest_release.outputs.data).*.ref }}'"
