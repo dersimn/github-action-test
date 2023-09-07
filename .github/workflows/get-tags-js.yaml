@@ -14,8 +14,8 @@ jobs:
         with:
           script: |
             const tags = await octokit.rest.repos.listTags({
-              'dersimn',
-              'github-action-test'
+              owner: 'dersimn',
+              repo: 'github-action-test'
             });
             return tags;
       - name: Get result
