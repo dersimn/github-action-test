@@ -13,11 +13,16 @@ jobs:
         id: set-result
         with:
           script: |
+            const semver = require('semver');
+            
             const response = await github.rest.repos.listTags({
               owner: 'dersimn',
               repo: 'github-action-test'
             });
+            
             const tags = response.data.map(t => t.name);
-            return tags;
+            const releases = tags.filter(t => !semver.prerelease(t));
+            
+            return releases;
       - name: Get result
         run: echo '${{steps.set-result.outputs.result}}'
