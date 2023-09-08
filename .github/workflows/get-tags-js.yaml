@@ -13,7 +13,8 @@ jobs:
         id: set-result
         with:
           script: |
-            const semver = require('semver');
+            # With this Action, require is not possible
+            #const semver = require('semver');
             
             const response = await github.rest.repos.listTags({
               owner: 'dersimn',
@@ -21,7 +22,6 @@ jobs:
             });
             
             const tags = response.data.map(t => t.name);
-            const releases = tags.filter(t => !semver.prerelease(t));
             
             return releases;
       - name: Get result
