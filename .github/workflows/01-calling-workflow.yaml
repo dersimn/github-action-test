@@ -35,4 +35,4 @@ jobs:
         with:
           workflow: 02-called-workflow.yaml
           ref: main
-          inputs: '{"greeting": "Foo"}'
+          #inputs: '{"greeting": "Foo"}'
