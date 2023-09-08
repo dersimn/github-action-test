@@ -34,5 +34,5 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: 02-called-workflow.yaml
-          ref: main
-          #inputs: '{"greeting": "Foo"}'
+          #ref: main
+          inputs: '{"greeting": "Foo"}'
