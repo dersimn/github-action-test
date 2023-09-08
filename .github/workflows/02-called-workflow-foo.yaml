@@ -15,10 +15,11 @@ on:
         required: false
         default: false
         type: boolean
-  # branches:
-  #   - '**'  # every branch
-  tags:
-    - 'v*.*.*'
+  push:
+    # branches:
+    #   - '**'  # every branch
+    tags:
+      - 'v*.*.*'
 
 jobs:
   release:
