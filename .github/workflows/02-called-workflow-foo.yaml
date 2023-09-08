@@ -1,4 +1,4 @@
-name: 02 Called Workflow
+name: 02 Called Workflow Foo
 
 on:
   workflow_dispatch:
