@@ -9,16 +9,8 @@ jobs:
   check-needs-update:
     runs-on: ubuntu-latest
     steps:
-      - name: Check if update available
-        id: check
-        uses: lucacome/docker-image-update-checker@v1
-        with:
-          base-image: library/ubuntu:latest
-          image: library/alpine:latest
-      - run: echo "${{ steps.check.outputs.needs-updating }}"
-      - if: ${{ steps.check.outputs.needs-updating }}
-        name: Invoke workflow without inputs
+      - name: Invoke workflow without inputs
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: 02 Called Workflow Foo
-          inputs: '{"greeting": "Foo"}'
+          inputs: '{"force_build": false}'
