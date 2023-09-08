@@ -8,8 +8,6 @@ on:
 jobs:
   check-needs-update:
     runs-on: ubuntu-latest
-    outputs:
-      needs-updating: ${{ steps.check.outputs.needs-updating }}
     steps:
       - name: Check if update available
         id: check
@@ -17,20 +15,9 @@ jobs:
         with:
           base-image: library/ubuntu:latest
           image: library/alpine:latest
-  output:
-    runs-on: ubuntu-latest
-    needs: check-needs-update
-    steps:
-      - env:
-          OUTPUT1: ${{ needs.check-needs-update.outputs.needs-updating }}
-        run: echo "$OUTPUT1"
-
-  call-workflow-passing-data:
-    needs: check-needs-update
-    if: ${{ needs.check-needs-update.outputs.needs-updating == 'true' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Invoke workflow without inputs
+      - run: echo "${{ steps.check.outputs.needs-updating }}"
+      - if: ${{ steps.check.outputs.needs-updating }}
+        name: Invoke workflow without inputs
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: 02 Called Workflow
