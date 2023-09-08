@@ -2,7 +2,19 @@ name: 02 Called Workflow Foo
 
 on:
   workflow_dispatch:
+    inputs:
+      greeting:
+        description: Greeting
+        required: false
+        default: 'world'
+        type: string
   workflow_call:
+    inputs:
+      greeting:
+        description: Greeting
+        required: false
+        default: 'world'
+        type: string
 
 jobs:
   # This workflow contains a single job called "build"
