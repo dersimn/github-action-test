@@ -1,0 +1,19 @@
+name: Inputs Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      greeting:
+        description: Greeting
+        required: false
+        default: 'world'
+        type: string
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a one-line script
+        run: echo Hello, ${{ inputs.greeting }}!
