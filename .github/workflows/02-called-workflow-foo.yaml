@@ -29,7 +29,7 @@ jobs:
         id: check
         uses: lucacome/docker-image-update-checker@v1
         with:
-          base-image: library/ubuntu:latest
+          base-image: library/alpine:latest
           image: library/alpine:latest
       - run: echo Update ${{ steps.check.outputs.needs-updating }}
       - run: echo Input ${{ inputs.force_build }}
