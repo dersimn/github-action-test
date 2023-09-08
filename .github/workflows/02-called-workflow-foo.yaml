@@ -30,8 +30,8 @@ jobs:
         with:
           base-image: library/ubuntu:latest
           image: library/alpine:latest
-      - run: echo Update: ${{ steps.check.outputs.needs-updating }}
-      - run: echo Input: ${{ inputs.force_build }}
-      - run: echo Event: ${{ github.event_name }}
+      - run: echo Update ${{ steps.check.outputs.needs-updating }}
+      - run: echo Input ${{ inputs.force_build }}
+      - run: echo Event ${{ github.event_name }}
       - if: ${{ steps.check.outputs.needs-updating || inputs.force_build || (github.event_name == 'push') }}
         run: echo This would be a build process
