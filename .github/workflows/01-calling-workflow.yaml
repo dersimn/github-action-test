@@ -33,6 +33,6 @@ jobs:
       - name: Invoke workflow without inputs
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: 02-called-workflow.yaml
+          workflow: 02 Called Workflow
           ref: v2.3.4
           inputs: '{"greeting": "Foo"}'
