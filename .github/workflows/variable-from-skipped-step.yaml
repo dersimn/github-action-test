@@ -1,0 +1,24 @@
+name: Output variable from skipped step
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 13 * * *"
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if update available
+        id: check
+        uses: lucacome/docker-image-update-checker@v1
+        if: ${{ (github.event_name == 'schedule') || (github.event_name == 'workflow_dispatch') }}
+        with:
+          base-image: library/alpine:latest
+          image: library/alpine:latest
+
+      - run: echo Update ${{ steps.check.outputs.needs-updating }}
