@@ -21,4 +21,14 @@ jobs:
           base-image: library/alpine:latest
           image: library/alpine:latest
 
+      # if step was skipped output variable is just empty
       - run: echo Update ${{ steps.check.outputs.needs-updating }}
+      - run: echo event_name ${{ github.event_name }}
+
+      - name: Decide to continue or skip
+        id: should-build
+        run: echo continue=${{ (steps.check.outputs.needs-updating == 'true') || (github.event_name != 'schedule') }} >> $GITHUB_OUTPUT
+
+      - run: echo if-step ${{ steps.should-build.outputs.continue }}
+      - if: ${{ steps.should-build.outputs.continue == 'true' }}
+        run: echo This would be a build process
