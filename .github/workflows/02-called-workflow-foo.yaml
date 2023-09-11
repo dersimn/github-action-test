@@ -38,5 +38,5 @@ jobs:
       - id: should-build
         run: echo foo=${{ (steps.check.outputs.needs-updating == 'true') || inputs.force_build || (github.event_name == 'push') }} >> $GITHUB_OUTPUT
       - run: echo if-step ${{ steps.should-build.outputs.foo }}
-      - if: ${{ steps.should-build.outputs.foo }}
+      - if: ${{ steps.should-build.outputs.foo == 'true' }}
         run: echo This would be a build process
