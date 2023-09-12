@@ -16,17 +16,17 @@ jobs:
             latest-tag: alpine
             base-image: alpine:3
             dockerfile: ./Dockerfile-alpine
-            build-platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+            build-platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/ppc64le,linux/s390x
           - flavor: ubuntu
             latest-tag: latest
             base-image: ubuntu:22.04
             dockerfile: ./Dockerfile-ubuntu
-            build-platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+            build-platforms: linux/amd64,linux/arm/v7,linux/ppc64le,linux/s390x
           - flavor: debian
             latest-tag: debian
             base-image: debian:12
             dockerfile: ./Dockerfile-debian
-            build-platforms: linux/386,linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64/v8,linux/mips64le,linux/ppc64le,linux/s390x
+            build-platforms: linux/386,linux/amd64,linux/arm/v5,linux/arm/v7,linux/mips64le,linux/ppc64le,linux/s390x
     steps:
       # Since Check step is only run by schedule and schedule always uses default branch,
       # we don't need to check for multiple target images with different tags or similar.
