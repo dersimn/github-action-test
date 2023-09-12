@@ -33,7 +33,7 @@ jobs:
       - name: Check if update for base image is available
         id: check
         uses: lucacome/docker-image-update-checker@v1
-        if: ${{ github.event_name == 'schedule' }}
+        #if: ${{ github.event_name == 'schedule' }}
         with:
           # For images without tag, latest will be checked.
           base-image: ${{ matrix.base-image }}
