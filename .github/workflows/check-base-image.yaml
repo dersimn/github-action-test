@@ -1,0 +1,46 @@
+name: Docker build and publish
+
+on:
+  workflow_dispatch:
+
+env:
+  TARGET_IMAGE: dersimn/github-actions-to-docker-hub-with-multiple-flavors
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - flavor: alpine
+            latest-tag: alpine
+            base-image: alpine:3
+            dockerfile: ./Dockerfile-alpine
+            build-platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          - flavor: ubuntu
+            latest-tag: latest
+            image: ubuntu:22.04
+            dockerfile: ./Dockerfile-ubuntu
+            build-platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          - flavor: debian
+            latest-tag: debian
+            image: debian:12
+            dockerfile: ./Dockerfile-debian
+            build-platforms: linux/386,linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64/v8,linux/mips64le,linux/ppc64le,linux/s390x
+    steps:
+      # Since Check step is only run by schedule and schedule always uses default branch,
+      # we don't need to check for multiple target images with different tags or similar.
+      - name: Check if update for base image is available
+        id: check
+        uses: lucacome/docker-image-update-checker@v1
+        if: ${{ github.event_name == 'schedule' }}
+        with:
+          # For images without tag, latest will be checked.
+          base-image: ${{ matrix.base-image }}
+          image: ${{ env.TARGET_IMAGE }}:${{ matrix.latest-tag }}
+          platforms: ${{ matrix.build-platforms }}
+
+      - name: Decide to continue or skip
+        id: should-build
+        # If check-step was skipped, output variable will be empty
+        run: echo continue=${{ (steps.check.outputs.needs-updating == 'true') || (github.event_name != 'schedule') }} >> $GITHUB_OUTPUT
