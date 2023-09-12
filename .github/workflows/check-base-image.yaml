@@ -32,7 +32,7 @@ jobs:
       # we don't need to check for multiple target images with different tags or similar.
       - name: Check if update for base image is available
         id: check
-        uses: lucacome/docker-image-update-checker@v1
+        uses: clowa/docker-image-update-checker@cebb3edee1fc9ed36c1526c23c784998c7ac2d75
         #if: ${{ github.event_name == 'schedule' }}
         with:
           # For images without tag, latest will be checked.
