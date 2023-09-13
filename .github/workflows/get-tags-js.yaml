@@ -17,7 +17,7 @@ jobs:
             //const semver = require('semver');
 
             const tags = [];
-            async *listAllTags() {
+            async function *listAllTags() {
               let i = 1;
               do {
                 console.log(i);
