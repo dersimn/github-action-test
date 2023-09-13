@@ -15,14 +15,21 @@ jobs:
           script: |
             # With this Action, require is not possible
             #const semver = require('semver');
+
+            const tags = [];
+            for (let i = 0; i < 3; i++) {
+              const response = await github.rest.repos.listTags({
+                owner: 'dersimn',
+                repo: 'github-action-test',
+                per_page: 100,
+                page: i
+              });
+              const tags_page = response.data.map(t => t.name);
+              console.log(tags_page);
+
+              tags.push(tags_page);
+            }
             
-            const response = await github.rest.repos.listTags({
-              owner: 'dersimn',
-              repo: 'github-action-test'
-            });
-            
-            const tags = response.data.map(t => t.name);
-            
-            return releases;
+            return tags;
       - name: Get result
         run: echo '${{steps.set-result.outputs.result}}'
