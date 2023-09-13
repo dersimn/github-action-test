@@ -18,6 +18,7 @@ jobs:
 
             const tags = [];
             for (let i = 0; i < 3; i++) {
+              console.log(i);
               const response = await github.rest.repos.listTags({
                 owner: 'dersimn',
                 repo: 'github-action-test',
