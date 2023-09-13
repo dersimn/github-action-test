@@ -28,7 +28,7 @@ jobs:
               const tags_page = response.data.map(t => t.name);
               console.log(tags_page);
 
-              tags.push(tags_page);
+              tags.push(...tags_page);
             }
             
             return tags;
