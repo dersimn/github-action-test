@@ -32,7 +32,7 @@ jobs:
                 yield tags_page;
               } while (tags_page.length);
             }
-            for await (const tags_page of listAllTags) {
+            for await (const tags_page of listAllTags()) {
               tags.push(...tags_page);
             }
             
