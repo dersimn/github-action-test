@@ -14,8 +14,9 @@ jobs:
           workflow: debug-print.yaml
   call2:
     uses: ./.github/workflows/debug-print.yaml
-  call3:
-    uses: ${{ github.repository }}/.github/workflows/debug-print.yaml@main
+  # Invalid https://github.com/orgs/community/discussions/25246
+  #call3:
+  #  uses: ${{ github.repository }}/.github/workflows/debug-print.yaml@main
   call4:
     runs-on: ubuntu-latest
     steps:
