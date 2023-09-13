@@ -1,4 +1,4 @@
-name: Debug print
+name: Debug Print
 
 on:
   workflow_dispatch:
@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo '${{ toJSON(github) }}'
+          echo '${{ toJSON(github) }}'
       - run: |
-          echo '${{ toJSON(env) }}'
+          echo '${{ toJSON(env) }}'
+      - run: |
+          export
