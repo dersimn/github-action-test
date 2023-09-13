@@ -12,3 +12,12 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: debug-print.yaml
+  call2:
+    uses: ./.github/workflows/debug-print.yaml
+  call3:
+    uses: ${{ github.repository }}/.github/workflows/debug-print.yaml@main
+  call4:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          gh workflow run debug-print.yaml

@@ -2,6 +2,11 @@ name: Debug Print
 
 on:
   workflow_dispatch:
+  workflow_call:
+  workflow_run:
+    workflows: [Debug Print call]
+    types:
+      - completed
   push:
 
 jobs:
