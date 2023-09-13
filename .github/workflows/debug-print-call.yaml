@@ -19,6 +19,8 @@ jobs:
   #  uses: ${{ github.repository }}/.github/workflows/debug-print.yaml@main
   call4:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
       - run: |
           gh workflow run debug-print.yaml
