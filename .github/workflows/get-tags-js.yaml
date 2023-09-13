@@ -19,6 +19,7 @@ jobs:
             const tags = [];
             async function *listAllTags() {
               let i = 1;
+              let tags_page;
               do {
                 console.log(i);
                 const response = await github.rest.repos.listTags({
@@ -27,7 +28,7 @@ jobs:
                   per_page: 100,
                   page: i++
                 })
-                const tags_page = response.data.map(t => t.name);
+                tags_page = response.data.map(t => t.name);
                 console.log(tags_page);
                 yield tags_page;
               } while (tags_page.length);
