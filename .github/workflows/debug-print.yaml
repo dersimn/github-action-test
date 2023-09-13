@@ -10,3 +10,5 @@ jobs:
     steps:
       - run: |
           echo '${{ toJSON(github) }}'
+      - run: |
+          echo '${{ toJSON(env) }}'
