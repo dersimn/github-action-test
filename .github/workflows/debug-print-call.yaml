@@ -1,0 +1,14 @@
+name: Debug Print call
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  call:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Invoke workflow without inputs
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: debug-print.yaml
