@@ -23,4 +23,4 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
       - run: |
-          gh workflow run debug-print.yaml
+          gh workflow --repo ${{ github.repository }} run debug-print.yaml
