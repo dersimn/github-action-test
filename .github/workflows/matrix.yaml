@@ -38,11 +38,11 @@ jobs:
       matrix:
         var1: [foo, bar]
         var2: [42, 0815]
-      include:
-        - flavor: alpine
-          name: this is alpine
-        - flavor: ubuntu
-          name: this is ubuntu
+        include:
+          - flavor: alpine
+            name: this is alpine
+          - flavor: ubuntu
+            name: this is ubuntu
     steps:
       - run: |
           echo '${{ toJSON(matrix) }}'
