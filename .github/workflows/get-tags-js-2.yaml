@@ -25,7 +25,7 @@ jobs:
             const github = require('@actions/github');
             const core = require('@actions/core');
 
-            console.logs(github.context);
+            console.log(github.context);
             
             const octokit = github.getOctokit(process.env.GITHUB_TOKEN)
 
