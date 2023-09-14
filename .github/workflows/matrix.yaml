@@ -1,0 +1,48 @@
+name: Matrix combinations
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  generator:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{steps.gen.outputs.matrix}}
+    steps:
+      - name: Generate some stuff
+        uses: satackey/action-js-inline@v0.0.2
+        id: gen
+        with:
+          script: |
+            const core = require('@actions/core');
+            core.setOutput('matrix', JSON.stringify({
+              var1: [
+                'foo',
+                'bar'
+              ],
+              var2: [
+                '0815',
+                '42'
+              ]
+            }))
+            
+      - name: Get result
+        run: echo '${{steps.gen.outputs.matrix}}'
+
+  read:
+    needs: [ generator ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        var1: [foo, bar]
+        var2: [42, 0815]
+      include:
+        - flavor: alpine
+          name: this is alpine
+        - flavor: ubuntu
+          name: this is ubuntu
+    steps:
+      - run: |
+          echo '${{ toJSON(matrix) }}'
