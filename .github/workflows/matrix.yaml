@@ -12,6 +12,7 @@ jobs:
       matrix:
         var1: [foo, bar]
         var2: [42, 0815]
+        flavor: [alpine, ubuntu]
         include:
           - flavor: alpine
             name: this is alpine
