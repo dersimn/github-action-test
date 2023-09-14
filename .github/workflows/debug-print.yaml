@@ -21,3 +21,5 @@ jobs:
           echo '${{ toJSON(env) }}'
       - run: |
           export
+      - run: |
+          gh repo view ${{ github.repository }} --json defaultBranchRef --jq .defaultBranchRef.name
