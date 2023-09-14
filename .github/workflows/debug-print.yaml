@@ -9,7 +9,7 @@ on:
       - completed
   push:
   schedule:
-    - cron: '53 8 * * *'
+    - cron: '23 9 * * *'
 
 jobs:
   release:
@@ -21,5 +21,7 @@ jobs:
           echo '${{ toJSON(env) }}'
       - run: |
           export
-      - run: |
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
           gh repo view ${{ github.repository }} --json defaultBranchRef --jq .defaultBranchRef.name
