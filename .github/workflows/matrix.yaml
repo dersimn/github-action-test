@@ -7,7 +7,6 @@ on:
 
 jobs:
   read:
-    needs: [ generator ]
     runs-on: ubuntu-latest
     strategy:
       matrix:
