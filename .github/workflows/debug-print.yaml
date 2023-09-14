@@ -8,6 +8,8 @@ on:
     types:
       - completed
   push:
+  schedule:
+    - cron: '53 8 * * *'
 
 jobs:
   release:
