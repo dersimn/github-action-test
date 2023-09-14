@@ -25,6 +25,6 @@ jobs:
       - run: |
           echo 'true-on-default=${{ matrix.default-flavor || 'false' }}'
       - run: |
-          echo 'true-on-default=${{ true && matrix.default-flavor }}'
+          echo 'true-on-default=${{ true && matrix.default-flavor || 'false' }}'
       - run: |
           echo 'always-false=${{ false && matrix.default-flavor }}'
