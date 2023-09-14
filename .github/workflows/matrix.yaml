@@ -6,31 +6,6 @@ on:
     branches: [ "main" ]
 
 jobs:
-  generator:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{steps.gen.outputs.matrix}}
-    steps:
-      - name: Generate some stuff
-        uses: satackey/action-js-inline@v0.0.2
-        id: gen
-        with:
-          script: |
-            const core = require('@actions/core');
-            core.setOutput('matrix', JSON.stringify({
-              var1: [
-                'foo',
-                'bar'
-              ],
-              var2: [
-                '0815',
-                '42'
-              ]
-            }))
-            
-      - name: Get result
-        run: echo '${{steps.gen.outputs.matrix}}'
-
   read:
     needs: [ generator ]
     runs-on: ubuntu-latest
