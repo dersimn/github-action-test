@@ -23,4 +23,4 @@ jobs:
       - run: |
           echo '${{ toJSON(matrix) }}'
       - run: |
-          echo 'is-default=${{ matrix.default-flavor }}'
+          echo 'is-default=${{ matrix.default-flavor || 'false' }}'
