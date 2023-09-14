@@ -18,6 +18,9 @@ jobs:
             name: this is alpine
           - flavor: ubuntu
             name: this is ubuntu
+            default-flavor: true
     steps:
       - run: |
           echo '${{ toJSON(matrix) }}'
+      - run: |
+          echo 'is-default=${{ matrix.default-flavor }}'
