@@ -42,3 +42,47 @@ jobs:
           echo "- Lets add a bullet point" >> $GITHUB_STEP_SUMMARY
           echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
           echo "- How about a third one?" >> $GITHUB_STEP_SUMMARY          
+
+  js:
+    runs-on: ubuntu-latest
+    steps:
+      - name: JS Test
+        uses: satackey/action-js-inline@v0.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        id: getdata
+        with:
+          script: |
+            const github = require('@actions/github');
+            const core = require('@actions/core');
+
+            core.startGroup('GitHub Context');
+            core.info(github.context);
+            core.endGroup();
+            
+            const octokit = github.getOctokit(process.env.GITHUB_TOKEN)
+
+            core.startGroup('GitHub Tags');
+            const tags = [];
+            async function *listAllTags() {
+              let i = 1;
+              let tags_page;
+              do {
+                core.debug(i);
+                const response = await octokit.rest.repos.listTags({
+                  owner: github.context.repo.owner,
+                  repo: github.context.repo.repo,
+                  per_page: 100,
+                  page: i++
+                });
+                tags_page = response.data.map(t => t.name);
+                core.debug(i, tags_page);
+                yield tags_page;
+              } while (tags_page.length);
+            }
+            for await (const snippet of listAllTags()) {
+              tags.push(...snippet);
+            }
+
+            core.info(tags);
+            core.endGroup();
