@@ -56,6 +56,10 @@ jobs:
             const github = require('@actions/github');
             const core = require('@actions/core');
 
+            core.startGroup('console.log test');
+            console.log(github.context);
+            core.endGroup();
+
             core.startGroup('GitHub Context');
             core.info(github.context);
             core.endGroup();
