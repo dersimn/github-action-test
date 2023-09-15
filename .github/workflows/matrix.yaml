@@ -7,6 +7,7 @@ on:
 
 jobs:
   read:
+    name: MyName with flavor ${{ matrix.flavor }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
